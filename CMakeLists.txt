@@ -13,16 +13,19 @@ option(with_qt_gui  "include image acquisition GUI"   ON)
 option(with_fc2     "include the FlyCapture2 backend" OFF)
 option(with_dc1394  "include the libdc1394 backend"   OFF)
 option(with_spin    "include the spin backend"   ON)
+option(with_arena   "include the Lucid Arena backend" OFF)
 option(with_demos   "include demos" OFF)
 option(with_tests   "include tests" OFF)
 
 message(STATUS "Option: with_fc2     = ${with_fc2}")
 message(STATUS "Option: with_dc1394  = ${with_dc1394}")
+message(STATUS "Option: with_spin    = ${with_spin}")
+message(STATUS "Option: with_arena   = ${with_arena}")
 message(STATUS "Option: with_qt_gui  = ${with_qt_gui}")
 message(STATUS "Option: with_demos   = ${with_demos}")
-message(STATUS "Option: with_tests   = ${with_tests}") 
+message(STATUS "Option: with_tests   = ${with_tests}")
 
-if( NOT( with_fc2 OR with_dc1394 OR with_spin) )
+if( NOT( with_fc2 OR with_dc1394 OR with_spin OR with_arena) )
     message(FATAL_ERROR "their must be at least one camera backend")
 endif()
 
@@ -49,6 +52,10 @@ endif()
 
 if(with_spin)
     find_package( Spinnaker MODULE REQUIRED )
+endif()
+
+if(with_arena)
+    find_package( Arena MODULE REQUIRED )
 endif()
 
 message(STATUS "past spinnaker")
@@ -92,6 +99,10 @@ if(with_spin)
     add_definitions(-DWITH_SPIN)
 endif()
 
+if(with_arena)
+    add_definitions(-DWITH_ARENA)
+endif()
+
 if(with_dc1394)
     add_definitions(-DWITH_DC1394)
 endif()
@@ -118,6 +129,10 @@ if (with_spin)
     include_directories(${Spinnaker_INCLUDE_DIRS})
     include_directories("./src/backend/spin")
 endif()
+if (with_arena)
+    include_directories(${Arena_INCLUDE_DIRS})
+    include_directories("./src/backend/arena")
+endif()
 
 if(with_dc1394)
     include_directories("./src/backend/dc1394")
@@ -138,6 +153,10 @@ endif()
 
 if (with_spin)
     set(bias_ext_link_LIBS ${bias_ext_link_LIBS} ${Spinnaker_LIBRARIES})
+endif()
+
+if (with_arena)
+    set(bias_ext_link_LIBS ${bias_ext_link_LIBS} ${Arena_LIBRARIES})
 endif()
 
 if(with_dc1394)
@@ -170,6 +189,10 @@ endif()
 
 if(with_spin)
     add_subdirectory("src/backend/spin")
+endif()
+
+if(with_arena)
+    add_subdirectory("src/backend/arena")
 endif()
 
 add_subdirectory("src/facade")

@@ -22,6 +22,10 @@
 #include "guid_device_spin.hpp"
 #endif
 
+#ifdef WITH_ARENA
+#include "guid_device_arena.hpp"
+#endif
+
 
 namespace bias {
     
@@ -69,21 +73,28 @@ namespace bias {
             explicit Guid(std::string guidStr);
             std::string getValue_spin();
 #endif
-           
+#ifdef WITH_ARENA
+        // Lucid Arena specific features. Tagged with CameraLib to disambiguate
+        // from the Spinnaker std::string constructor when both are enabled.
+        public:
+            Guid(std::string ipStr, CameraLib lib);
+            std::string getValue_arena();
+#endif
+
     };
 
     class GuidCmp : public std::binary_function<Guid, Guid, bool>
     {
         // Comparision object for Guid objects
         public:
-            bool operator() (const Guid &guid0, const Guid &guid1);
+            bool operator() (const Guid &guid0, const Guid &guid1) const;
     };
 
     class GuidPtrCmp : public std::binary_function<GuidPtr, GuidPtr, bool>
     {
-        // Comparison object for shared_ptrs to Guid objects  
+        // Comparison object for shared_ptrs to Guid objects
         public:
-            bool operator() (const GuidPtr &guidPtr0, const GuidPtr &guidPtr1);
+            bool operator() (const GuidPtr &guidPtr0, const GuidPtr &guidPtr1) const;
     };
 
 } // namespase bias
