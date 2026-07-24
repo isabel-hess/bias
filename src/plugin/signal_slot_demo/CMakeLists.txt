@@ -34,7 +34,6 @@ add_library(
     ${signal_slot_demo_plugin_SOURCES} 
     )
 
-add_dependencies(signal_slot_demo_plugin ${signal_slot_demo_plugin_FORMS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(.)
 target_link_libraries(

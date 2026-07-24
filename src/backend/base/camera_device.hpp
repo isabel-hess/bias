@@ -21,7 +21,7 @@ namespace bias
 
             Guid getGuid(); 
             virtual ~CameraDevice() {};
-            virtual CameraLib getCameraLib() {};
+            virtual CameraLib getCameraLib() { return CAMERA_LIB_UNDEFINED; };
 
             virtual void connect() {};
             virtual void disconnect() {};

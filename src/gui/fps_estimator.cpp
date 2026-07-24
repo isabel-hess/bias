@@ -26,7 +26,7 @@ namespace bias
     double FPS_Estimator::setCutOffFreq(double freq)
     {
         cutOffFreq_ = freq;
-
+        return cutOffFreq_;
     }
 
     void FPS_Estimator::update(double timeNew) 

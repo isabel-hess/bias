@@ -3499,7 +3499,7 @@ namespace bias
         for (int i=0; i<histSize.height; i++) 
         {
             int y0 = int(histImageMaxY);
-            int y1 = int(histImageMaxY - hist.at<float>(0,i));
+            int y1 = int(histImageMaxY - hist.at<float>(i,0));
             painter.drawLine(i,y0,i,y1);
         }
 

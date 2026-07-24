@@ -107,7 +107,7 @@ namespace bias
             bool operator() (
                     const CompressedFrame_ufmf &cmpFrame0,
                     const CompressedFrame_ufmf &cmpFrame1
-                    );
+                    ) const;
     };
 
     // Typedef for sets and queues of compressed frame objects

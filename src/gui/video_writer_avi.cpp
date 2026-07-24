@@ -13,7 +13,7 @@ namespace bias
     const double VideoWriter_avi::DEFAULT_FPS = 30.0;
     const double VideoWriter_avi::MIN_ALLOWED_DT_ESTIMATE = 0.00001; 
     const unsigned int VideoWriter_avi::DEFAULT_FRAME_SKIP = 1;
-    const int VideoWriter_avi::DEFAULT_FOURCC = CV_FOURCC('X','V','I','D');
+    const int VideoWriter_avi::DEFAULT_FOURCC = cv::VideoWriter::fourcc('X','V','I','D');
     const VideoWriterParams_avi VideoWriter_avi::DEFAULT_PARAMS = 
         VideoWriterParams_avi();
 
@@ -151,16 +151,16 @@ namespace bias
     {
         QMap<unsigned int, QString> map;
         map[0] = QString("NONE"); 
-        map[CV_FOURCC('X','V','I','D')] = QString("XVID");
-        //map[CV_FOURCC('D','I','B',' ')] = QString("DIB"); 
-        map[CV_FOURCC('I','4','2','0')] = QString("I420");
-        map[CV_FOURCC('I','Y','U','V')] = QString("IYUV");
-        map[CV_FOURCC('M','P','4','2')] = QString("MP42");
-        map[CV_FOURCC('D','I','V','3')] = QString("DIV3");
-        map[CV_FOURCC('D','I','V','X')] = QString("DIVX");
-        map[CV_FOURCC('U','2','6','3')] = QString("H263");
-        map[CV_FOURCC('F','L','V','1')] = QString("FLV1");
-        map[CV_FOURCC('H','F','Y','U')] = QString("HFYU");
+        map[cv::VideoWriter::fourcc('X','V','I','D')] = QString("XVID");
+        //map[cv::VideoWriter::fourcc('D','I','B',' ')] = QString("DIB"); 
+        map[cv::VideoWriter::fourcc('I','4','2','0')] = QString("I420");
+        map[cv::VideoWriter::fourcc('I','Y','U','V')] = QString("IYUV");
+        map[cv::VideoWriter::fourcc('M','P','4','2')] = QString("MP42");
+        map[cv::VideoWriter::fourcc('D','I','V','3')] = QString("DIV3");
+        map[cv::VideoWriter::fourcc('D','I','V','X')] = QString("DIVX");
+        map[cv::VideoWriter::fourcc('U','2','6','3')] = QString("H263");
+        map[cv::VideoWriter::fourcc('F','L','V','1')] = QString("FLV1");
+        map[cv::VideoWriter::fourcc('H','F','Y','U')] = QString("HFYU");
         return map;
     }
 
@@ -215,7 +215,7 @@ namespace bias
         }
         else
         {
-            return 0; //CV_FOURCC('D','I','B',' ');
+            return 0; //cv::VideoWriter::fourcc('D','I','B',' ');
         }
     }
 

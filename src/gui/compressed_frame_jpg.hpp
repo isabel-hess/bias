@@ -73,7 +73,7 @@ namespace bias
             bool operator() (
                     const CompressedFrame_jpg &cmpFrame0,
                     const CompressedFrame_jpg &cmpFrame1
-                    );
+                    ) const;
     };
 
     typedef LockableQueue<CompressedFrame_jpg> CompressedFrameQueue_jpg;

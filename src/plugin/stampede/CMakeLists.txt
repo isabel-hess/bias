@@ -41,7 +41,6 @@ add_library(
     ${stampede_plugin_SOURCES} 
     )
 
-add_dependencies(stampede_plugin ${stampede_plugin_FORMS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(.)
 target_link_libraries(

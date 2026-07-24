@@ -35,7 +35,6 @@ add_library(
     ${grab_detector_plugin_SOURCES} 
     )
 
-add_dependencies(grab_detector_plugin ${grab_detector_plugin_FORMS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(.)
 target_link_libraries(
