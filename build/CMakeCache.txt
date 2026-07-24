@@ -257,6 +257,24 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 //The directory containing a CMake configuration file for OpenCV.
 OpenCV_DIR:PATH=C:/msys64/mingw64/lib/cmake/opencv4
 
+//The directory containing a CMake configuration file for Qt5Core.
+Qt5Core_DIR:PATH=C:/msys64/mingw64/lib/cmake/Qt5Core
+
+//The directory containing a CMake configuration file for Qt5Gui.
+Qt5Gui_DIR:PATH=C:/msys64/mingw64/lib/cmake/Qt5Gui
+
+//The directory containing a CMake configuration file for Qt5Network.
+Qt5Network_DIR:PATH=C:/msys64/mingw64/lib/cmake/Qt5Network
+
+//The directory containing a CMake configuration file for Qt5PrintSupport.
+Qt5PrintSupport_DIR:PATH=C:/msys64/mingw64/lib/cmake/Qt5PrintSupport
+
+//The directory containing a CMake configuration file for Qt5SerialPort.
+Qt5SerialPort_DIR:PATH=C:/msys64/mingw64/lib/cmake/Qt5SerialPort
+
+//The directory containing a CMake configuration file for Qt5Widgets.
+Qt5Widgets_DIR:PATH=C:/msys64/mingw64/lib/cmake/Qt5Widgets
+
 //Value Computed by CMake
 bais_BINARY_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/build
 
@@ -303,13 +321,85 @@ bias_camera_facade_LIB_DEPENDS:STATIC=general;bias_backend_base;general;bias_bac
 bias_camera_facade_SOURCE_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/src/facade
 
 //Value Computed by CMake
+bias_gui_BINARY_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/build/src/gui
+
+//Value Computed by CMake
+bias_gui_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+bias_gui_SOURCE_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/src/gui
+
+//Value Computed by CMake
 bias_plugin_BINARY_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/build/src/plugin/base
 
 //Value Computed by CMake
 bias_plugin_IS_TOP_LEVEL:STATIC=OFF
 
+//Dependencies for the target
+bias_plugin_LIB_DEPENDS:STATIC=general;opencv_calib3d;general;opencv_core;general;opencv_dnn;general;opencv_features2d;general;opencv_flann;general;opencv_gapi;general;opencv_highgui;general;opencv_imgcodecs;general;opencv_imgproc;general;opencv_ml;general;opencv_objdetect;general;opencv_photo;general;opencv_stitching;general;opencv_video;general;opencv_videoio;general;opencv_alphamat;general;opencv_aruco;general;opencv_bgsegm;general;opencv_ccalib;general;opencv_cvv;general;opencv_datasets;general;opencv_dnn_objdetect;general;opencv_dnn_superres;general;opencv_dpm;general;opencv_face;general;opencv_freetype;general;opencv_fuzzy;general;opencv_hdf;general;opencv_hfs;general;opencv_img_hash;general;opencv_intensity_transform;general;opencv_line_descriptor;general;opencv_mcc;general;opencv_optflow;general;opencv_ovis;general;opencv_phase_unwrapping;general;opencv_plot;general;opencv_quality;general;opencv_rapid;general;opencv_reg;general;opencv_rgbd;general;opencv_saliency;general;opencv_sfm;general;opencv_shape;general;opencv_signal;general;opencv_stereo;general;opencv_structured_light;general;opencv_superres;general;opencv_surface_matching;general;opencv_text;general;opencv_tracking;general;opencv_videostab;general;opencv_viz;general;opencv_wechat_qrcode;general;opencv_xfeatures2d;general;opencv_ximgproc;general;opencv_xobjdetect;general;opencv_xphoto;general;C:/Program Files/Lucid Vision Labs/Arena SDK/lib64/ArenaC/ArenaC_v140.lib;general;Qt5::Core;general;Qt5::Widgets;general;Qt5::Gui;
+
 //Value Computed by CMake
 bias_plugin_SOURCE_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/src/plugin/base
+
+//Value Computed by CMake
+bias_utility_BINARY_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/build/src/utility
+
+//Value Computed by CMake
+bias_utility_IS_TOP_LEVEL:STATIC=OFF
+
+//Dependencies for the target
+bias_utility_LIB_DEPENDS:STATIC=general;opencv_calib3d;general;opencv_core;general;opencv_dnn;general;opencv_features2d;general;opencv_flann;general;opencv_gapi;general;opencv_highgui;general;opencv_imgcodecs;general;opencv_imgproc;general;opencv_ml;general;opencv_objdetect;general;opencv_photo;general;opencv_stitching;general;opencv_video;general;opencv_videoio;general;opencv_alphamat;general;opencv_aruco;general;opencv_bgsegm;general;opencv_ccalib;general;opencv_cvv;general;opencv_datasets;general;opencv_dnn_objdetect;general;opencv_dnn_superres;general;opencv_dpm;general;opencv_face;general;opencv_freetype;general;opencv_fuzzy;general;opencv_hdf;general;opencv_hfs;general;opencv_img_hash;general;opencv_intensity_transform;general;opencv_line_descriptor;general;opencv_mcc;general;opencv_optflow;general;opencv_ovis;general;opencv_phase_unwrapping;general;opencv_plot;general;opencv_quality;general;opencv_rapid;general;opencv_reg;general;opencv_rgbd;general;opencv_saliency;general;opencv_sfm;general;opencv_shape;general;opencv_signal;general;opencv_stereo;general;opencv_structured_light;general;opencv_superres;general;opencv_surface_matching;general;opencv_text;general;opencv_tracking;general;opencv_videostab;general;opencv_viz;general;opencv_wechat_qrcode;general;opencv_xfeatures2d;general;opencv_ximgproc;general;opencv_xobjdetect;general;opencv_xphoto;general;C:/Program Files/Lucid Vision Labs/Arena SDK/lib64/ArenaC/ArenaC_v140.lib;general;bias_camera_facade;general;Qt5::Core;general;Qt5::Widgets;general;Qt5::Gui;general;Qt5::Network;
+
+//Value Computed by CMake
+bias_utility_SOURCE_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/src/utility
+
+//Value Computed by CMake
+grab_detector_plugin_BINARY_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/build/src/plugin/grab_detector
+
+//Value Computed by CMake
+grab_detector_plugin_IS_TOP_LEVEL:STATIC=OFF
+
+//Dependencies for the target
+grab_detector_plugin_LIB_DEPENDS:STATIC=general;opencv_calib3d;general;opencv_core;general;opencv_dnn;general;opencv_features2d;general;opencv_flann;general;opencv_gapi;general;opencv_highgui;general;opencv_imgcodecs;general;opencv_imgproc;general;opencv_ml;general;opencv_objdetect;general;opencv_photo;general;opencv_stitching;general;opencv_video;general;opencv_videoio;general;opencv_alphamat;general;opencv_aruco;general;opencv_bgsegm;general;opencv_ccalib;general;opencv_cvv;general;opencv_datasets;general;opencv_dnn_objdetect;general;opencv_dnn_superres;general;opencv_dpm;general;opencv_face;general;opencv_freetype;general;opencv_fuzzy;general;opencv_hdf;general;opencv_hfs;general;opencv_img_hash;general;opencv_intensity_transform;general;opencv_line_descriptor;general;opencv_mcc;general;opencv_optflow;general;opencv_ovis;general;opencv_phase_unwrapping;general;opencv_plot;general;opencv_quality;general;opencv_rapid;general;opencv_reg;general;opencv_rgbd;general;opencv_saliency;general;opencv_sfm;general;opencv_shape;general;opencv_signal;general;opencv_stereo;general;opencv_structured_light;general;opencv_superres;general;opencv_surface_matching;general;opencv_text;general;opencv_tracking;general;opencv_videostab;general;opencv_viz;general;opencv_wechat_qrcode;general;opencv_xfeatures2d;general;opencv_ximgproc;general;opencv_xobjdetect;general;opencv_xphoto;general;C:/Program Files/Lucid Vision Labs/Arena SDK/lib64/ArenaC/ArenaC_v140.lib;general;bias_plugin;general;bias_utility;general;bias_camera_facade;general;qcustomplot;general;Qt5::Core;general;Qt5::Widgets;general;Qt5::Gui;general;Qt5::PrintSupport;general;Qt5::SerialPort;
+
+//Value Computed by CMake
+grab_detector_plugin_SOURCE_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/src/plugin/grab_detector
+
+//Value Computed by CMake
+qcustomplot_BINARY_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/build/src/3rd_party/qcustomplot
+
+//Value Computed by CMake
+qcustomplot_IS_TOP_LEVEL:STATIC=OFF
+
+//Dependencies for the target
+qcustomplot_LIB_DEPENDS:STATIC=general;opencv_calib3d;general;opencv_core;general;opencv_dnn;general;opencv_features2d;general;opencv_flann;general;opencv_gapi;general;opencv_highgui;general;opencv_imgcodecs;general;opencv_imgproc;general;opencv_ml;general;opencv_objdetect;general;opencv_photo;general;opencv_stitching;general;opencv_video;general;opencv_videoio;general;opencv_alphamat;general;opencv_aruco;general;opencv_bgsegm;general;opencv_ccalib;general;opencv_cvv;general;opencv_datasets;general;opencv_dnn_objdetect;general;opencv_dnn_superres;general;opencv_dpm;general;opencv_face;general;opencv_freetype;general;opencv_fuzzy;general;opencv_hdf;general;opencv_hfs;general;opencv_img_hash;general;opencv_intensity_transform;general;opencv_line_descriptor;general;opencv_mcc;general;opencv_optflow;general;opencv_ovis;general;opencv_phase_unwrapping;general;opencv_plot;general;opencv_quality;general;opencv_rapid;general;opencv_reg;general;opencv_rgbd;general;opencv_saliency;general;opencv_sfm;general;opencv_shape;general;opencv_signal;general;opencv_stereo;general;opencv_structured_light;general;opencv_superres;general;opencv_surface_matching;general;opencv_text;general;opencv_tracking;general;opencv_videostab;general;opencv_viz;general;opencv_wechat_qrcode;general;opencv_xfeatures2d;general;opencv_ximgproc;general;opencv_xobjdetect;general;opencv_xphoto;general;C:/Program Files/Lucid Vision Labs/Arena SDK/lib64/ArenaC/ArenaC_v140.lib;general;bias_camera_facade;general;Qt5::Core;general;Qt5::Widgets;general;Qt5::Gui;general;Qt5::PrintSupport;
+
+//Value Computed by CMake
+qcustomplot_SOURCE_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/src/3rd_party/qcustomplot
+
+//Value Computed by CMake
+signal_slot_demo_plugin_BINARY_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/build/src/plugin/signal_slot_demo
+
+//Value Computed by CMake
+signal_slot_demo_plugin_IS_TOP_LEVEL:STATIC=OFF
+
+//Dependencies for the target
+signal_slot_demo_plugin_LIB_DEPENDS:STATIC=general;opencv_calib3d;general;opencv_core;general;opencv_dnn;general;opencv_features2d;general;opencv_flann;general;opencv_gapi;general;opencv_highgui;general;opencv_imgcodecs;general;opencv_imgproc;general;opencv_ml;general;opencv_objdetect;general;opencv_photo;general;opencv_stitching;general;opencv_video;general;opencv_videoio;general;opencv_alphamat;general;opencv_aruco;general;opencv_bgsegm;general;opencv_ccalib;general;opencv_cvv;general;opencv_datasets;general;opencv_dnn_objdetect;general;opencv_dnn_superres;general;opencv_dpm;general;opencv_face;general;opencv_freetype;general;opencv_fuzzy;general;opencv_hdf;general;opencv_hfs;general;opencv_img_hash;general;opencv_intensity_transform;general;opencv_line_descriptor;general;opencv_mcc;general;opencv_optflow;general;opencv_ovis;general;opencv_phase_unwrapping;general;opencv_plot;general;opencv_quality;general;opencv_rapid;general;opencv_reg;general;opencv_rgbd;general;opencv_saliency;general;opencv_sfm;general;opencv_shape;general;opencv_signal;general;opencv_stereo;general;opencv_structured_light;general;opencv_superres;general;opencv_surface_matching;general;opencv_text;general;opencv_tracking;general;opencv_videostab;general;opencv_viz;general;opencv_wechat_qrcode;general;opencv_xfeatures2d;general;opencv_ximgproc;general;opencv_xobjdetect;general;opencv_xphoto;general;C:/Program Files/Lucid Vision Labs/Arena SDK/lib64/ArenaC/ArenaC_v140.lib;general;bias_plugin;general;bias_utility;general;bias_camera_facade;general;Qt5::Core;general;Qt5::Widgets;general;Qt5::Gui;general;Qt5::PrintSupport;
+
+//Value Computed by CMake
+signal_slot_demo_plugin_SOURCE_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/src/plugin/signal_slot_demo
+
+//Value Computed by CMake
+stampede_plugin_BINARY_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/build/src/plugin/stampede
+
+//Value Computed by CMake
+stampede_plugin_IS_TOP_LEVEL:STATIC=OFF
+
+//Dependencies for the target
+stampede_plugin_LIB_DEPENDS:STATIC=general;opencv_calib3d;general;opencv_core;general;opencv_dnn;general;opencv_features2d;general;opencv_flann;general;opencv_gapi;general;opencv_highgui;general;opencv_imgcodecs;general;opencv_imgproc;general;opencv_ml;general;opencv_objdetect;general;opencv_photo;general;opencv_stitching;general;opencv_video;general;opencv_videoio;general;opencv_alphamat;general;opencv_aruco;general;opencv_bgsegm;general;opencv_ccalib;general;opencv_cvv;general;opencv_datasets;general;opencv_dnn_objdetect;general;opencv_dnn_superres;general;opencv_dpm;general;opencv_face;general;opencv_freetype;general;opencv_fuzzy;general;opencv_hdf;general;opencv_hfs;general;opencv_img_hash;general;opencv_intensity_transform;general;opencv_line_descriptor;general;opencv_mcc;general;opencv_optflow;general;opencv_ovis;general;opencv_phase_unwrapping;general;opencv_plot;general;opencv_quality;general;opencv_rapid;general;opencv_reg;general;opencv_rgbd;general;opencv_saliency;general;opencv_sfm;general;opencv_shape;general;opencv_signal;general;opencv_stereo;general;opencv_structured_light;general;opencv_superres;general;opencv_surface_matching;general;opencv_text;general;opencv_tracking;general;opencv_videostab;general;opencv_viz;general;opencv_wechat_qrcode;general;opencv_xfeatures2d;general;opencv_ximgproc;general;opencv_xobjdetect;general;opencv_xphoto;general;C:/Program Files/Lucid Vision Labs/Arena SDK/lib64/ArenaC/ArenaC_v140.lib;general;bias_plugin;general;bias_utility;general;Qt5::Core;general;Qt5::Widgets;general;Qt5::Gui;general;Qt5::SerialPort;
+
+//Value Computed by CMake
+stampede_plugin_SOURCE_DIR:STATIC=C:/Users/labadmin/Documents/GitHub/reiserlab/bias/src/plugin/stampede
 
 //include the Lucid Arena backend
 with_arena:BOOL=ON
@@ -324,7 +414,7 @@ with_demos:BOOL=OFF
 with_fc2:BOOL=OFF
 
 //include image acquisition GUI
-with_qt_gui:BOOL=OFF
+with_qt_gui:BOOL=ON
 
 //include the spin backend
 with_spin:BOOL=OFF
@@ -448,7 +538,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=6
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=11
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
