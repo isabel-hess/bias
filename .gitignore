@@ -1,2 +1,7 @@
 # CMake build directories (build, build_ucrt, build_spin, ...)
 /build*/
+
+# Debug dump written to the CWD by CameraDevice_spin::setupTimeStamping()
+# (src/backend/spin/camera_device_spin.cpp). Not anchored: it lands wherever
+# the GUI is launched from.
+chuckselector_entries.txt
