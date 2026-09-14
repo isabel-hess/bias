@@ -1,0 +1,2 @@
+# CMake build directories (build, build_ucrt, build_spin, ...)
+/build*/

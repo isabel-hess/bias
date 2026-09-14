@@ -156,7 +156,7 @@ namespace bias
     void CompressedFrame_jpg::write()
     {
         std::vector<int> compressionParams;
-        compressionParams.push_back(CV_IMWRITE_JPEG_QUALITY);
+        compressionParams.push_back(cv::IMWRITE_JPEG_QUALITY);
         compressionParams.push_back(int(quality_));
 
         try
@@ -175,7 +175,7 @@ namespace bias
     void CompressedFrame_jpg::encode()
     {
         std::vector<int> compressionParams;
-        compressionParams.push_back(CV_IMWRITE_JPEG_QUALITY);
+        compressionParams.push_back(cv::IMWRITE_JPEG_QUALITY);
         compressionParams.push_back(int(quality_));
         cv::imencode(".jpg", stampedImg_.image, encodedJpgBuffer_, compressionParams);
         haveEncoding_ = true;
@@ -186,7 +186,7 @@ namespace bias
     bool CompressedFrameCmp_jpg::operator() (
             const CompressedFrame_jpg &cmpFrame0,
             const CompressedFrame_jpg &cmpFrame1
-            )
+            ) const
     {
         bool haveImage0 = cmpFrame0.haveStampedImage();
         bool haveImage1 = cmpFrame1.haveStampedImage();

@@ -28,7 +28,7 @@ namespace bias
 
         // Find contours  
         std::vector<std::vector<cv::Point>> contours;
-        cv::findContours(img.clone(),contours,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_NONE);
+        cv::findContours(img.clone(),contours,cv::RETR_EXTERNAL,cv::CHAIN_APPROX_NONE);
 
         // Remove contours whose area is less than the given threshold 
         for (unsigned int i=0; i < contours.size(); i++)
@@ -36,7 +36,7 @@ namespace bias
             double area = cv::contourArea(contours[i]);
             if (area < areaThreshold)
             {
-                cv::drawContours(imgModified,contours,i,cv::Scalar(0), CV_FILLED);
+                cv::drawContours(imgModified,contours,i,cv::Scalar(0), cv::FILLED);
             }
 
         }
@@ -74,7 +74,7 @@ namespace bias
 
         // Find contours  
         std::vector<std::vector<cv::Point>> contours;
-        cv::findContours(img.clone(),contours,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_NONE);
+        cv::findContours(img.clone(),contours,cv::RETR_EXTERNAL,cv::CHAIN_APPROX_NONE);
 
         // Find contour w/ maximum area
         unsigned int maxArea = 0;
@@ -92,7 +92,7 @@ namespace bias
         // If found, draw filled version of maximum area contour
         if (maxArea > 0)
         {
-            cv::drawContours(imgModified,contours,maxAreaInd,cv::Scalar(255), CV_FILLED);
+            cv::drawContours(imgModified,contours,maxAreaInd,cv::Scalar(255), cv::FILLED);
         }
         return imgModified;
     }

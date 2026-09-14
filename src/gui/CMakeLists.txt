@@ -100,7 +100,6 @@ add_executable(
     ${bias_gui_SOURCES} 
     )
 
-add_dependencies(test_gui ${bias_gui_FORMS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(.)
 target_link_libraries(

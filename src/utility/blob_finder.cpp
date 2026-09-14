@@ -44,7 +44,7 @@ namespace bias
         if ((image.channels() > 1) || (image.depth() != CV_8U))
         {
             image8UC1 = cv::Mat(image.size(), CV_8UC1, cv::Scalar(0));
-            cvtColor(image,image8UC1,CV_BGR2GRAY);
+            cvtColor(image,image8UC1,cv::COLOR_BGR2GRAY);
         }
         else
         {
@@ -57,16 +57,16 @@ namespace bias
                 data.thresholdImage, 
                 param_.thresholdLax, 
                 param_.thresholdMaxVal, 
-                CV_THRESH_BINARY
+                cv::THRESH_BINARY
                 );
         data.thresholdImage = param_.thresholdMaxVal - data.thresholdImage;
         cv::Mat imageTemp = data.thresholdImage.clone();
         std::vector<std::vector<cv::Point>> contours;
-        cv::findContours(imageTemp, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
+        cv::findContours(imageTemp, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_NONE);
 
         // Filter blob data and draw contours on image
         data.blobDataImage = cv::Mat(image8UC1.size(), CV_8UC3, cv::Scalar(0,0,0));
-        cvtColor(image8UC1,data.blobDataImage,CV_GRAY2BGR);
+        cvtColor(image8UC1,data.blobDataImage,cv::COLOR_GRAY2BGR);
 
         if (image.channels() > 1)
         {
@@ -76,7 +76,7 @@ namespace bias
         else
         {
             data.blobDataImage = cv::Mat(image8UC1.size(), CV_8UC3, cv::Scalar(0,0,0));
-            cvtColor(image8UC1,data.blobDataImage,CV_GRAY2BGR);
+            cvtColor(image8UC1,data.blobDataImage,cv::COLOR_GRAY2BGR);
         }
 
 

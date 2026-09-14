@@ -15,6 +15,9 @@
 #ifdef WITH_SPIN
 #include "SpinnakerC.h"
 #endif
+#ifdef WITH_ARENA
+#include "ArenaCApi.h"
+#endif
 
 namespace bias {
 
@@ -48,10 +51,14 @@ namespace bias {
             void createQueryContext_spin();
             void destroyQueryContext_spin();
 
+            void createQueryContext_arena();
+            void destroyQueryContext_arena();
+
             void update();
             void update_fc2();
             void update_dc1394();
             void update_spin();
+            void update_arena();
 
 #ifdef WITH_FC2
         private:
@@ -65,6 +72,10 @@ namespace bias {
         private:
             spinSystem queryContext_spin_ = nullptr;
 
+#endif
+#ifdef WITH_ARENA
+        private:
+            acSystem queryContext_arena_ = nullptr;
 #endif
     };
 

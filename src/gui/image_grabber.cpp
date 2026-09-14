@@ -17,8 +17,8 @@
 
 namespace bias {
 
-    unsigned int ImageGrabber::DEFAULT_NUM_STARTUP_SKIP = 2;
-    unsigned int ImageGrabber::MIN_STARTUP_SKIP = 2;
+    unsigned int ImageGrabber::DEFAULT_NUM_STARTUP_SKIP = 10;
+    unsigned int ImageGrabber::MIN_STARTUP_SKIP = 1;
     unsigned int ImageGrabber::MAX_ERROR_COUNT = 500;
 
     ImageGrabber::ImageGrabber(QObject *parent) : QObject(parent) 

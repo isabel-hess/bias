@@ -373,7 +373,7 @@ namespace bias
     bool CompressedFrameCmp_ufmf::operator() (
             const CompressedFrame_ufmf &cmpFrame0,
             const CompressedFrame_ufmf &cmpFrame1
-            )
+            ) const
     {
         bool haveData0 = cmpFrame0.haveData();
         bool haveData1 = cmpFrame1.haveData();

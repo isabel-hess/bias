@@ -145,14 +145,15 @@ namespace bias {
             void createCameraDevice_fc2(Guid guid);
             void createCameraDevice_dc1394(Guid guid);
             void createCameraDevice_spin(Guid guid);
+            void createCameraDevice_arena(Guid guid);
 
     };
 
     class CameraPtrCmp : public std::binary_function<CameraPtr, CameraPtr, bool>
     {
-        // Comparison object for shared_ptrs to Guid objects  
+        // Comparison object for shared_ptrs to Guid objects
         public:
-            bool operator() (const CameraPtr &camPtr0, const CameraPtr &camPtr1);
+            bool operator() (const CameraPtr &camPtr0, const CameraPtr &camPtr1) const;
     };
 
 }
