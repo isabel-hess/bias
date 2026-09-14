@@ -97,6 +97,13 @@ endif()
 
 if(with_spin)
     add_definitions(-DWITH_SPIN)
+    if(MINGW)
+        # SpinnakerPlatformC.h only defines SPINNAKER_DEPRECATED_API for MSVC
+        # (it branches on _MSC_VER). Under MinGW it is never defined and every
+        # function declaration in SpinnakerC.h fails to parse. Supply just this
+        # one macro rather than faking _MSC_VER, which would break Qt/OpenCV.
+        add_definitions(-DSPINNAKER_DEPRECATED_API=)
+    endif()
 endif()
 
 if(with_arena)

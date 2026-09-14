@@ -338,10 +338,41 @@ namespace bias {
                 throw RuntimeError(ERROR_SPIN_GET_CAMERA, ssError.str());
             }
 
-            // Get GUID from camera
+            // Get GUID from camera.
+            //
+            // Use DeviceSerialNumber from the transport-layer device node map
+            // rather than spinCameraGetUniqueID(). GetUniqueID returns a
+            // USB-path-based string (e.g. "USB\VID_1E10&PID_4000\23227866_0"),
+            // but CameraDevice_spin::connect() looks the camera up with
+            // spinCameraListGetBySerial(), which matches only the plain
+            // DeviceSerialNumber ("23227866"). A mismatch there does not fail
+            // loudly - GetBySerial returns SPINNAKER_ERR_SUCCESS with a NULL
+            // handle, which only surfaces later as INVALID_HANDLE (-1006) in
+            // spinCameraInit(). Both ends must use the same identifier.
             size_t bufSize = 64;
             std::vector<char> bufVec(bufSize);
-            error = spinCameraGetUniqueID(hCam,&bufVec[0],&bufSize);
+
+            spinNodeMapHandle hNodeMapTLDevice = nullptr;
+            error = spinCameraGetTLDeviceNodeMap(hCam, &hNodeMapTLDevice);
+            if (error != SPINNAKER_ERR_SUCCESS)
+            {
+                std::stringstream ssError;
+                ssError << __PRETTY_FUNCTION__;
+                ssError << ": unable to get Spinnaker TLDevice node map, error=" << error;
+                throw RuntimeError(ERROR_SPIN_GET_TLDEVICE_NODE_MAP, ssError.str());
+            }
+
+            spinNodeHandle hSerialNode = nullptr;
+            error = spinNodeMapGetNode(hNodeMapTLDevice, "DeviceSerialNumber", &hSerialNode);
+            if (error != SPINNAKER_ERR_SUCCESS)
+            {
+                std::stringstream ssError;
+                ssError << __PRETTY_FUNCTION__;
+                ssError << ": unable to get DeviceSerialNumber node, error=" << error;
+                throw RuntimeError(ERROR_SPIN_GET_NODE_HANDLE, ssError.str());
+            }
+
+            error = spinStringGetValue(hSerialNode, &bufVec[0], &bufSize);
             if (error != SPINNAKER_ERR_SUCCESS)
             {
                 std::stringstream ssError;

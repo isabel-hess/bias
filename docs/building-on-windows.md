@@ -85,6 +85,40 @@ Notes:
   `-DArena_INCLUDE_DIR="C:/Program Files/Lucid Vision Labs/Arena SDK/include/ArenaC"`
   `-DArena_LIBRARY="C:/Program Files/Lucid Vision Labs/Arena SDK/lib64/ArenaC/ArenaC_v140.lib"`
 
+### Building the Spinnaker (FLIR) backend instead
+
+Same toolchain; just flip the backend flags:
+
+```bash
+export CMAKE_POLICY_VERSION_MINIMUM=3.5
+cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release \
+      -Dwith_spin=ON -Dwith_arena=OFF -Dwith_fc2=OFF -Dwith_dc1394=OFF \
+      -Dwith_qt_gui=ON -Dwith_demos=OFF -Dwith_tests=OFF \
+      -B build_spin .
+cmake --build build_spin -j
+```
+
+Spinnaker-specific notes:
+- `FindSpinnaker.cmake` prefers `C:/Program Files/FLIR Systems/Spinnaker`
+  (current FLIR installers) and falls back to the old
+  `C:/Program Files/Point Grey Research/Spinnaker`. Override with
+  `-DSpinnaker_INCLUDE_DIR=... -DSpinnaker_LIBRARY=...` if yours is elsewhere.
+- Under MinGW the build defines `SPINNAKER_DEPRECATED_API=` automatically —
+  `SpinnakerPlatformC.h` only defines it for MSVC (`_MSC_VER`), and without it
+  every declaration in `SpinnakerC.h` fails to parse. Do **not** fake
+  `_MSC_VER`; that breaks Qt and OpenCV headers.
+- **Runtime PATH ordering matters:** Spinnaker's `bin64\vs2015` ships its own
+  `Qt5Core/Qt5Gui/Qt5Network.dll`. Put `C:\msys64\ucrt64\bin` **first** and
+  Spinnaker's `bin64\vs2015` second, or the loader mixes mismatched Qt DLLs and
+  the app dies with `STATUS_DLL_NOT_FOUND` (0xC0000135).
+- **SDK version:** verified against Spinnaker **3.2.0.65** (FLIR Firefly
+  FFY-U3-04S2M, USB3). The C API has had renames across major versions — e.g.
+  `spinImageConvert` was removed in favour of
+  `spinImageProcessorCreate`/`Convert`/`Destroy`, which this code now uses. If
+  you are on a different major version (e.g. 4.x), grep your
+  `include/spinc/SpinnakerC.h` for the functions the code calls before assuming
+  they still exist.
+
 ---
 
 ## 3. Running the GUI

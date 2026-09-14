@@ -10,7 +10,13 @@
 
 if (WIN32)
     message(STATUS "FindSpinnaker system is WIN232")
-    set(typical_spin_dir "C:/Program Files/Point Grey Research/Spinnaker")
+    # Current FLIR installers use "FLIR Systems"; older Point Grey installers
+    # used "Point Grey Research". Prefer the new location if it exists.
+    if(EXISTS "C:/Program Files/FLIR Systems/Spinnaker")
+        set(typical_spin_dir "C:/Program Files/FLIR Systems/Spinnaker")
+    else()
+        set(typical_spin_dir "C:/Program Files/Point Grey Research/Spinnaker")
+    endif()
     set(typical_spin_lib_dir "${typical_spin_dir}/lib64/vs2015")
     set(typical_spin_inc_dir "${typical_spin_dir}/include/spinc")
 else()
