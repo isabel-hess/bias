@@ -191,7 +191,7 @@ Pixi cannot fetch them. Keep them as documented system prerequisites:
    Build iteratively with `pixi run build`, fixing MSVC errors.
 4. Wire `[tasks]` for configure/build/gui/clean; add the SDK preflight + PATH
    handling; consider `[environments]` per backend.
-5. Update `run_bias.bat` (or replace with `pixi run gui`) and the docs
+5. Update `build_and_run_bias.bat` (or replace with `pixi run gui`) and the docs
    ([building-on-windows.md](building-on-windows.md), README) to describe the
    pixi workflow. Keep the MSYS2 instructions as a documented fallback until the
    MSVC path is proven.

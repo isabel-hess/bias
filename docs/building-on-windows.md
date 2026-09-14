@@ -132,15 +132,27 @@ Spinnaker-specific notes:
 
 ### Easiest: the helper script
 
-From the repo root:
+From the repo root (double-clickable - on failure it explains why and pauses):
 
 ```bat
-run_bias.bat
+build_and_run_bias.bat            :: Lucid Arena backend (default)
+build_and_run_bias.bat --spin     :: FLIR/Teledyne Spinnaker backend
+build_and_run_bias.bat -n         :: skip the build, just launch
+build_and_run_bias.bat --help     :: usage
 ```
 
-It puts the correct directories on `PATH`, sets the Qt platform-plugin path,
-and launches `build_ucrt\test_gui.exe`. Edit the paths at the top of the script
-if your toolchain or SDK live elsewhere.
+It configures and builds if needed (Arena into `build_ucrt\`, Spinnaker into
+`build_spin\`), puts the right directories on `PATH` in the right order, sets
+the Qt platform-plugin path, and launches `test_gui.exe`.
+
+It auto-detects the MSYS2 ucrt64 toolchain (honoring `MSYS2_ROOT`) and the
+camera SDK (honoring `LUCID_DEV_ROOT` / `SPINNAKER_INSTALL_PATH`, falling back
+to the standard install locations), so normally there is nothing to edit. Any
+extra arguments are passed through to `test_gui.exe`.
+
+**Note:** this is a helper script, not a standalone executable - it still needs
+the prerequisites from section 1 (MSYS2 toolchain + camera SDK) installed on
+the machine.
 
 ### Manual launch
 

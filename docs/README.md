@@ -30,10 +30,13 @@ cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release \
 cmake --build build_ucrt -j
 ```
 
-Then launch the GUI with the provided helper (from the repo root):
+Or just use the helper script, which builds if needed and then launches
+(from the repo root, double-clickable):
 
 ```bat
-run_bias.bat
+build_and_run_bias.bat            :: Lucid Arena backend (default)
+build_and_run_bias.bat --spin     :: FLIR/Teledyne Spinnaker backend
+build_and_run_bias.bat -n         :: skip the build, just launch
 ```
 
 Each connected Lucid camera opens its own window, titled with the camera's IP
