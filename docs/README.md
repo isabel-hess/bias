@@ -14,6 +14,10 @@ Local documentation for building and extending BIAS.
   **UCRT64** toolchain, plus how to run the GUI and drive it over the HTTP
   control API.
 
+- **[pixi-conversion-plan.md](pixi-conversion-plan.md)** — scoping + plan
+  (not yet implemented) for converting BIAS to a **pixi** project for
+  reproducible dependency handling and compilation. For a future agent.
+
 ## Quick start (Windows, Lucid GigE camera)
 
 ```bash
