@@ -32,8 +32,19 @@ namespace bias {
         {
             std::stringstream ssError;
             ssError << __PRETTY_FUNCTION__;
-            ssError << ": unable to create Spinnaker context, error = " << err; 
+            ssError << ": unable to create Spinnaker context, error = " << err;
             throw RuntimeError(ERROR_SPIN_CREATE_CONTEXT, ssError.str());
+        }
+
+        // Create the image processor used for pixel format conversion in
+        // grabImage (spinImageConvert no longer exists in the C API).
+        err = spinImageProcessorCreate(&hImageProcessor_);
+        if (err != SPINNAKER_ERR_SUCCESS)
+        {
+            std::stringstream ssError;
+            ssError << __PRETTY_FUNCTION__;
+            ssError << ": unable to create Spinnaker image processor, error = " << err;
+            throw RuntimeError(ERROR_SPIN_IMAGE_PROCESSOR_CREATE, ssError.str());
         }
     }
 
@@ -50,8 +61,14 @@ namespace bias {
             disconnect(); 
         }
 
+        if (hImageProcessor_ != nullptr)
+        {
+            spinImageProcessorDestroy(hImageProcessor_);
+            hImageProcessor_ = nullptr;
+        }
+
         spinError err = spinSystemReleaseInstance(hSystem_);
-        if ( err != SPINNAKER_ERR_SUCCESS ) 
+        if ( err != SPINNAKER_ERR_SUCCESS )
         {
             std::stringstream ssError;
             ssError << __PRETTY_FUNCTION__;
@@ -103,6 +120,23 @@ namespace bias {
                 throw RuntimeError(ERROR_SPIN_GET_CAMERA, ssError.str());
             }
 
+            // Initialize camera BEFORE clearing/destroying the camera list.
+            // Clearing the list releases the list's reference to each camera,
+            // so initializing afterwards risks operating on an invalidated
+            // handle. This matches the ordering in the SDK's own
+            // Acquisition_C example (get -> init -> use -> deinit -> release,
+            // then clear/destroy the list).
+            err = spinCameraInit(hCamera_);
+            if (err != SPINNAKER_ERR_SUCCESS)
+            {
+                hCamera_ = nullptr;
+                std::stringstream ssError;
+                ssError << __PRETTY_FUNCTION__;
+                ssError << ": unable to initialize Spinnaker camera, error=" << err;
+                throw RuntimeError(ERROR_SPIN_GET_TLDEVICE_NODE_MAP, ssError.str());
+            }
+            connected_ = true;
+
             // Clear Spinnaker camera list
             err = spinCameraListClear(hCameraList);
             if (err != SPINNAKER_ERR_SUCCESS)
@@ -122,18 +156,6 @@ namespace bias {
                 ssError << ": unable to destroy Spinnaker camera list, error=" << err;
                 throw RuntimeError(ERROR_SPIN_DESTROY_CAMERA_LIST, ssError.str());
             }
-
-            // Initialize camera
-            err = spinCameraInit(hCamera_);
-            if (err != SPINNAKER_ERR_SUCCESS)
-            {
-                hCamera_ = nullptr;
-                std::stringstream ssError;
-                ssError << __PRETTY_FUNCTION__;
-                ssError << ": unable to initialize Spinnaker camera, error=" << err;
-                throw RuntimeError(ERROR_SPIN_GET_TLDEVICE_NODE_MAP, ssError.str());
-            }
-            connected_ = true;
 
             // Setup node maps for TLDevice and camera and get camera info
             nodeMapTLDevice_ = NodeMapTLDevice_spin(hCamera_);
@@ -374,7 +396,8 @@ namespace bias {
         spinPixelFormatEnums origPixelFormat = getImagePixelFormat_spin(hSpinImage_);
         spinPixelFormatEnums convPixelFormat = getSuitablePixelFormat(origPixelFormat);
         
-        err = spinImageConvert(hSpinImage_, convPixelFormat, hSpinImageConv);
+        // Note argument order: (processor, src, dest, format)
+        err = spinImageProcessorConvert(hImageProcessor_, hSpinImage_, hSpinImageConv, convPixelFormat);
         if (err != SPINNAKER_ERR_SUCCESS) 
         {
             std::stringstream ssError;

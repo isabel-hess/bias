@@ -21,8 +21,10 @@ Install the vendor SDK for your camera and note its location:
   `C:\Program Files\Lucid Vision Labs\Arena SDK`.
   The installer sets `LUCID_DEV_ROOT` and puts the runtime DLLs in
   `…\Arena SDK\x64Release` (usually added to the system `PATH`).
-- **FLIR (USB3):** Spinnaker SDK, default
-  `C:\Program Files\FLIR Systems\Spinnaker` (see `FindSpinnaker.cmake`).
+- **FLIR / Teledyne (USB3):** Spinnaker SDK. 4.x installs to
+  `C:\Program Files\Teledyne\Spinnaker`; 2.x-3.x used
+  `C:\Program Files\FLIR Systems\Spinnaker` (see `FindSpinnaker.cmake`). The
+  installer sets `SPINNAKER_INSTALL_PATH` and adds `bin64\vs2015` to `PATH`.
 
 Sanity-check the hardware first with the SDK's own tools (e.g. Arena's
 `ArenaView`, or the Spinnaker `Enumeration`/`Acquisition` example binaries)
@@ -84,6 +86,45 @@ Notes:
 - If CMake can't find the Arena SDK, pass it explicitly:
   `-DArena_INCLUDE_DIR="C:/Program Files/Lucid Vision Labs/Arena SDK/include/ArenaC"`
   `-DArena_LIBRARY="C:/Program Files/Lucid Vision Labs/Arena SDK/lib64/ArenaC/ArenaC_v140.lib"`
+
+### Building the Spinnaker (FLIR) backend instead
+
+Same toolchain; just flip the backend flags:
+
+```bash
+export CMAKE_POLICY_VERSION_MINIMUM=3.5
+cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release \
+      -Dwith_spin=ON -Dwith_arena=OFF -Dwith_fc2=OFF -Dwith_dc1394=OFF \
+      -Dwith_qt_gui=ON -Dwith_demos=OFF -Dwith_tests=OFF \
+      -B build_spin .
+cmake --build build_spin -j
+```
+
+Spinnaker-specific notes:
+- `FindSpinnaker.cmake` honors the installer's `SPINNAKER_INSTALL_PATH` env var
+  first, then falls back to the known roots newest-first:
+  `C:/Program Files/Teledyne/Spinnaker` (4.x),
+  `C:/Program Files/FLIR Systems/Spinnaker` (2.x-3.x),
+  `C:/Program Files/Point Grey Research/Spinnaker` (1.x). Override with
+  `-DSpinnaker_INCLUDE_DIR=... -DSpinnaker_LIBRARY=...` if yours is elsewhere.
+- Under MinGW the build defines `SPINNAKER_DEPRECATED_API=` automatically —
+  `SpinnakerPlatformC.h` only defines it for MSVC (`_MSC_VER`), and without it
+  every declaration in `SpinnakerC.h` fails to parse. Do **not** fake
+  `_MSC_VER`; that breaks Qt and OpenCV headers.
+- **Runtime PATH ordering matters:** Spinnaker's `bin64\vs2015` ships its own
+  `Qt5Core/Qt5Gui/Qt5Network.dll`. Put `C:\msys64\ucrt64\bin` **first** and
+  Spinnaker's `bin64\vs2015` second (for 4.x:
+  `C:\Program Files\Teledyne\Spinnaker\bin64\vs2015`), or the loader mixes Qt DLLs and
+  the app dies with `STATUS_DLL_NOT_FOUND` (0xC0000135).
+- **SDK version:** verified against Spinnaker **4.4.0.246** and **3.2.0.65**
+  (FLIR Firefly FFY-U3-04S2M, USB3). Both need the same source fixes - e.g.
+  `spinImageConvert` is absent from both, so this code uses
+  `spinImageProcessorCreate`/`Convert`/`Destroy` instead. Between 3.2 and 4.4
+  only the *install root* changed (FLIR Systems -> Teledyne); the
+  `include/spinc` and `lib64/vs2015/SpinnakerC_v140.lib` sub-layout is
+  unchanged. If you move to a newer major version, grep your
+  `include/spinc/SpinnakerC.h` for the functions the code calls before assuming
+  they still exist.
 
 ---
 

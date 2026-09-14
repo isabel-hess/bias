@@ -100,6 +100,10 @@ namespace bias {
             spinSystem hSystem_ = nullptr;
             spinCamera hCamera_ = nullptr;
 
+            // Image conversion is done through an explicit image processor
+            // object (spinImageConvert was removed from the Spinnaker C API).
+            spinImageProcessor hImageProcessor_ = nullptr;
+
             spinNodeMapHandle hNodeMapCamera_ = nullptr;
             spinNodeMapHandle hNodeMapTLDevice_ = nullptr;
 
